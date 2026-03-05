@@ -5,30 +5,47 @@ class AuthService {
         this.token = null;
     }
 
-    login(username, password) {
-        // Implement login logic
-        // On success, save token
-        this.token = 'dummy-token'; // Replace with actual token
-        console.log('User logged in:', username);
+    // Handle User Registration
+    register(userData) {
+        // Logic for registering a new user
+        return fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        });
     }
 
-    register(username, email, password) {
-        // Implement registration logic
-        console.log('User registered:', username);
+    // Handle User Login
+    login(credentials) {
+        // Logic for user login
+        return fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credentials)
+        }).then(response => response.json())
+          .then(data => {
+              this.token = data.token;
+              localStorage.setItem('token', this.token);
+          });
     }
 
+    // Handle User Logout
     logout() {
-        // Implement logout logic
         this.token = null;
-        console.log('User logged out');
+        localStorage.removeItem('token');
+        // Additional logout logic if necessary
     }
 
+    // Token Management
     getToken() {
+        if (!this.token) {
+            this.token = localStorage.getItem('token');
+        }
         return this.token;
     }
 
-    isAuthenticated() {
-        return this.token !== null;
+    isLoggedIn() {
+        return this.getToken() !== null;
     }
 }
 
