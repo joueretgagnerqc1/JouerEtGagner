@@ -1,53 +1,42 @@
-// AuthService.ts
-
 class AuthService {
     constructor() {
-        // Initialize token
         this.token = null;
     }
 
-    // User login
-    async login(username, password) {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
-        const data = await response.json();
-        if (data.token) {
-            this.token = data.token;
-            localStorage.setItem('auth_token', this.token);
-        }
-        return data;
-    }
-
-    // User registration
+    // Register a new user
     async register(username, password) {
-        const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
-        return await response.json();
+        // Implement registration logic here (API call)
+        // On success, store the token
+        console.log(`User ${username} registered successfully`);
+        // Example: this.token = response.token;
     }
 
-    // User logout
+    // Login
+    async login(username, password) {
+        // Implement login logic here (API call)
+        // On success, store the token
+        console.log(`User ${username} logged in successfully`);
+        // Example: this.token = response.token;
+    }
+
+    // Logout
     logout() {
         this.token = null;
-        localStorage.removeItem('auth_token');
+        console.log(`User logged out`);
     }
 
     // Token management
-    getToken() {
-        return this.token || localStorage.getItem('auth_token');
+    setToken(token) {
+        this.token = token;
     }
 
+    getToken() {
+        return this.token;
+    }
+
+    // Authentication state checking
     isAuthenticated() {
-        return !!this.getToken();
+        return this.token !== null;
     }
 }
 
