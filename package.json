@@ -1,1 +1,1 @@
-{ "name": "JouerEtGagner", "version": "1.0.0", "private": true, "scripts": { "start": "node index.js" } }
+{\n  "name": "JouerEtGagner",\n  "version": "1.0.0",\n  "private": true,\n  "dependencies": {\n    "react-native": "~0.64.0",\n    "expo": "~43.0.0",\n    "typescript": "~4.5.2",\n    "@react-native-community/netinfo": "^8.1.0",\n    "@react-navigation/native": "^6.0.0",\n    "@react-navigation/stack": "^6.0.0",\n    "react-native-reward": "latest",\n    "expo-ads-admob": "latest"\n  }\n}
